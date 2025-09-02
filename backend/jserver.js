@@ -31,6 +31,21 @@ server.post('/register', (req, res) => {
   res.status(201).json(newUser)
 })
 
+server.post('/login', (req, res) => {
+  const { username, password } = req.body
+
+  const users = router.db.get('users').value()
+
+  const isValidPassword = users.find((u) => u.password === password)
+  const isValidLogin = users.find((u) => u.username === username)
+
+  if (!isValidLogin || !isValidPassword) {
+    return res.status(400).json({ error: 'Wrong password or login' })
+  }
+
+  res.status(201).json({ message: 'Succeeded!' })
+})
+
 server.use(middlewares)
 server.use(router)
 

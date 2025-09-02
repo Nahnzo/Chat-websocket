@@ -1,9 +1,10 @@
-import WebSocketComponent from './Websocket'
+// import WebSocketComponent from './Websocket'
 
-const App = () => {
+const App = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <WebSocketComponent />
+    <div style={{ minHeight: '100vh', background: '#1D2F36', alignContent: 'center' }}>
+      {children}
+      {/* <WebSocketComponent /> */}
     </div>
   )
 }
