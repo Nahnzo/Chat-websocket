@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { login } from '../model/userService'
 import { Link } from 'react-router-dom'
-import { ROUTES } from '../../../shared/routes'
+import { onLogin } from '../../User/model/services'
+import { useAppDispatch } from 'shared/Pages/hooks/typedhooks'
+import { ROUTES } from 'shared/routes/routes'
 import classes from './authForm.module.css'
 
 const AuthForm = () => {
@@ -15,6 +16,8 @@ const AuthForm = () => {
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
+
+  const dispatch = useAppDispatch()
 
   return (
     <div className={classes.formContainer}>
@@ -39,9 +42,15 @@ const AuthForm = () => {
         />
       </form>
       <div className={classes.handlersContainer}>
-        <button onClick={() => login({ username, password })} className={classes.loginBtn}>
+        <button
+          onClick={() => dispatch(onLogin({ username, password }))}
+          className={classes.loginBtn}
+        >
           Войти
         </button>
+        {/* <button onClick={() => onLogin({ username, password })} className={classes.loginBtn}>
+          Войти
+        </button> */}
         <p>Нет аккаунта?</p>
         <Link to={ROUTES.register}>
           <p>Зарегистрироваться</p>

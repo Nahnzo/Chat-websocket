@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { register } from '../model/userService'
 import { Link } from 'react-router-dom'
-import { ROUTES } from '../../../shared/routes'
+import { ROUTES } from 'shared/routes/routes'
 import classes from './registerForm.module.css'
+import { onRegister } from '../../User/model/services'
+import { useAppDispatch } from 'shared/Pages/hooks/typedhooks'
 
 const RegisterForm = () => {
   const [username, setUsername] = useState<string>('')
@@ -15,6 +16,8 @@ const RegisterForm = () => {
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
+
+  const dispatch = useAppDispatch()
 
   return (
     <div className={classes.formContainer}>
@@ -39,7 +42,10 @@ const RegisterForm = () => {
         />
       </form>
       <div className={classes.handlersContainer}>
-        <button onClick={() => register({ username, password })} className={classes.registerBtn}>
+        <button
+          onClick={() => dispatch(onRegister({ username, password }))}
+          className={classes.registerBtn}
+        >
           Зарегистрироваться
         </button>
         <p>Есть аккаунт?</p>
