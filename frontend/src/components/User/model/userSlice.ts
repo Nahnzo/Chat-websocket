@@ -5,12 +5,16 @@ interface User {
   username: string
   password: string
   isAuth: boolean
+  isLoading: boolean
+  error: string
 }
 
 const initialUserState: User = {
   username: '',
   password: '',
   isAuth: false,
+  isLoading: false,
+  error: '',
 }
 
 const userSlice = createSlice({
@@ -19,15 +23,35 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(onLogin.pending, (state) => {
+        state.isLoading = true
+        state.isAuth = false
+      })
       .addCase(onLogin.fulfilled, (state, action) => {
-        console.log(action)
+        state.isAuth = true
+        state.isLoading = false
+        state.username = action.meta.arg.username
+        state.password = action.meta.arg.password
       })
       .addCase(onLogin.rejected, (state, action) => {
-        console.log(action.payload)
+        state.isAuth = false
+        state.isLoading = false
+        state.error = action.payload.message
       })
-
+      .addCase(onRegister.pending, (state) => {
+        state.isLoading = true
+        state.isAuth = false
+      })
+      .addCase(onRegister.fulfilled, (state, action) => {
+        state.isAuth = true
+        state.isLoading = false
+        state.username = action.meta.arg.username
+        state.password = action.meta.arg.password
+      })
       .addCase(onRegister.rejected, (state, action) => {
-        console.log(action.payload)
+        state.isAuth = false
+        state.isLoading = false
+        state.error = action.payload.message
       })
   },
 })

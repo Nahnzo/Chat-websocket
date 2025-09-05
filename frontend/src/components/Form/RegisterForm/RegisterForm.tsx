@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'shared/routes/routes'
-import classes from './registerForm.module.css'
 import { onRegister } from '../../User/model/services'
-import { useAppDispatch } from 'shared/Pages/hooks/typedhooks'
+import { useAppDispatch, useAppSelector } from 'shared/hooks/typedHooks'
+import { useRedirectHook } from 'shared/hooks/useRedirectHook'
+import { getIsAuthUser } from '../model/selectors'
+import classes from './registerForm.module.css'
 
 const RegisterForm = () => {
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const isAuth = useAppSelector(getIsAuthUser)
+  const path = ROUTES.profile
+  useRedirectHook({ isAuth, path })
 
   const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value)
