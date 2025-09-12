@@ -10,7 +10,7 @@ export const useRedirectHook = ({ isAuth, path }: UseRedirectHookProps) => {
   const navigate = useNavigate()
   useEffect(() => {
     if (isAuth) {
-      navigate(path, { replace: true })
+      navigate(path)
     }
   }, [isAuth, navigate, path])
 }

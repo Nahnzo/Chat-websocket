@@ -3,6 +3,7 @@ import { AuthForm, RegisterForm } from 'components/Form'
 import { ROUTES } from 'shared/routes/routes'
 import { ProfilePage } from 'shared/Pages'
 import App from '../../App'
+import { RoomPage } from 'components/Room'
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,18 @@ export const router = createBrowserRouter([
   },
   {
     path: ROUTES.profile,
-    element: <ProfilePage />,
+    element: (
+      <App>
+        <ProfilePage />
+      </App>
+    ),
+  },
+  {
+    path: `${ROUTES.room}:id`,
+    element: (
+      <App>
+        <RoomPage />
+      </App>
+    ),
   },
 ])
