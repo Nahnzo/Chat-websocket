@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react'
+import classes from './webSocket.module.css'
 
 interface WebSocketComponentProps {
   roomId: string
   userName: string
 }
 
+interface MessageData {
+  type: 'userJoined' | 'userLeft' | 'newMessage'
+  user?: string
+  message?: string
+}
+
 const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
-  const [messages, setMessages] = useState<{ user: string; message: string }[]>([])
+  const [messages, setMessages] = useState<MessageData[]>([])
   const [inputMessage, setInputMessage] = useState('')
   const [socket, setSocket] = useState<WebSocket | null>(null)
 
@@ -19,11 +26,14 @@ const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
     }
 
     ws.onmessage = (event) => {
-      const parsed = JSON.parse(event.data)
+      const parsed: MessageData = JSON.parse(event.data)
       setMessages((prev) => [...prev, parsed])
     }
 
-    return () => ws.close()
+    return () => {
+      ws.send(JSON.stringify({ type: 'leftRoom', roomId, user: userName }))
+      ws.close()
+    }
   }, [roomId, userName])
 
   const sendMessage = () => {
@@ -41,17 +51,44 @@ const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
   }
 
   return (
-    <div>
-      <div>
-        {messages.map((msg, idx) => (
-          <p key={idx}>
-            <b>{msg.user}:</b> {msg.message}
-          </p>
-        ))}
+    <>
+      <div className={classes.messagesContainer}>
+        {messages.map((msg, idx) => {
+          if (msg.type === 'userJoined') {
+            return (
+              <p key={idx}>
+                <i>{msg.user} joined the room</i>
+              </p>
+            )
+          } else if (msg.type === 'userLeft') {
+            return (
+              <p key={idx}>
+                <i>{msg.user} left the room</i>
+              </p>
+            )
+          } else if (msg.type === 'newMessage') {
+            return (
+              <p key={idx}>
+                <b>{msg.user}:</b> {msg.message}
+              </p>
+            )
+          }
+          return null
+        })}
       </div>
-      <input value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} />
-      <button onClick={sendMessage}>Send</button>
-    </div>
+
+      <div className={classes.inputContainer}>
+        <input
+          value={inputMessage}
+          onChange={(e) => setInputMessage(e.target.value)}
+          className={classes.input}
+          placeholder="Send a message..."
+        />
+        <button onClick={sendMessage} className={classes.btnSend}>
+          Send
+        </button>
+      </div>
+    </>
   )
 }
 
