@@ -10,6 +10,7 @@ interface MessageData {
   type: 'userJoined' | 'userLeft' | 'newMessage'
   user?: string
   message?: string
+  quantityUsers: number
 }
 
 const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
@@ -49,9 +50,14 @@ const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
       setInputMessage('')
     }
   }
+  if (messages[0] == null) {
+    return <div>Download</div>
+  }
+  console.log(messages)
 
   return (
     <>
+      <div>{messages[0].quantityUsers}</div>
       <div className={classes.messagesContainer}>
         {messages.map((msg, idx) => {
           if (msg.type === 'userJoined') {
