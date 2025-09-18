@@ -1,0 +1,16 @@
+.messageContainer {
+  background-color: #1a1919;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 7px;
+  margin: 5px 0 5px 0;
+}
+
+.userName {
+  font-size: 16px;
+}
+
+.text {
+  margin-top: 4px;
+}

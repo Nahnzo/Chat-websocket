@@ -1,0 +1,28 @@
+.messagesContainer {
+  width: 100%;
+  position: sticky;
+  height: fit-content;
+  top: 0;
+  font-size: 18px;
+  color: rgb(219, 216, 216);
+  padding: 15px 15px 0 15px;
+}
+
+.userAction {
+  text-align: center;
+  font-size: 15px;
+
+  & span {
+    font-style: italic;
+    color: rgb(219, 216, 216);
+  }
+}
+
+.quantityUsers {
+  width: 100%;
+  font-size: 16px;
+  color: rgba(245, 244, 244, 0.63);
+  text-align: center;
+  height: 40px;
+  margin-top: 5px;
+}

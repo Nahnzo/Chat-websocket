@@ -1,17 +1,31 @@
 import { useState, useEffect } from 'react'
 import classes from './webSocket.module.css'
+import { EventsChat } from 'components/EventsChat'
 
 interface WebSocketComponentProps {
   roomId: string
   userName: string
 }
 
-interface MessageData {
-  type: 'userJoined' | 'userLeft' | 'newMessage'
-  user?: string
-  message?: string
-  quantityUsers: number
-}
+export type MessageData =
+  | {
+      type: 'userJoined'
+      user: string
+      userNameColor: string
+      quantityUsers: number
+    }
+  | {
+      type: 'userLeft'
+      user: string
+      quantityUsers: number
+    }
+  | {
+      type: 'newMessage'
+      user: string
+      message: string
+      userNameColor: string
+      quantityUsers: number
+    }
 
 const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
   const [messages, setMessages] = useState<MessageData[]>([])
@@ -53,36 +67,10 @@ const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
   if (messages[0] == null) {
     return <div>Download</div>
   }
-  console.log(messages)
 
   return (
     <>
-      <div>{messages[0].quantityUsers}</div>
-      <div className={classes.messagesContainer}>
-        {messages.map((msg, idx) => {
-          if (msg.type === 'userJoined') {
-            return (
-              <p key={idx}>
-                <i>{msg.user} joined the room</i>
-              </p>
-            )
-          } else if (msg.type === 'userLeft') {
-            return (
-              <p key={idx}>
-                <i>{msg.user} left the room</i>
-              </p>
-            )
-          } else if (msg.type === 'newMessage') {
-            return (
-              <p key={idx}>
-                <b>{msg.user}:</b> {msg.message}
-              </p>
-            )
-          }
-          return null
-        })}
-      </div>
-
+      <EventsChat messages={messages} />
       <div className={classes.inputContainer}>
         <input
           value={inputMessage}

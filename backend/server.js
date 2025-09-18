@@ -1,4 +1,5 @@
 import { WebSocketServer } from 'ws'
+import getRandomUsersColor from './utils.js'
 
 const rooms = {}
 
@@ -27,6 +28,9 @@ wss.on('connection', (ws) => {
 
         if (!rooms[currentRoom]) rooms[currentRoom] = new Set()
 
+        ws.userName = userName
+        ws.userColor = getRandomUsersColor()
+
         rooms[currentRoom].add(ws)
 
         const activeClientsJoin = Array.from(rooms[currentRoom]).filter(
@@ -36,6 +40,7 @@ wss.on('connection', (ws) => {
         broadcast(currentRoom, {
           type: 'userJoined',
           user: userName,
+          userNameColor: ws.userColor,
           quantityUsers: activeClientsJoin.length,
         })
         break
@@ -44,7 +49,8 @@ wss.on('connection', (ws) => {
         if (currentRoom && rooms[currentRoom]) {
           broadcast(currentRoom, {
             type: 'newMessage',
-            user: parsed.user,
+            user: ws.userName,
+            userNameColor: ws.userColor,
             message: parsed.message,
           })
         }
