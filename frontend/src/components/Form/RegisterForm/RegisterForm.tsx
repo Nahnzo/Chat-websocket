@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'shared/routes/routes'
-import { onRegister } from '../../User/model/services'
+import { onRegister } from '../../../entities/User/model/services'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/typedHooks'
 import { useRedirectHook } from 'shared/hooks/useRedirectHook'
 import { getIsAuthUser } from '../model/selectors'

@@ -1,0 +1,26 @@
+.roomFormContainer {
+  width: 800px;
+  height: 500px;
+  background-color: white;
+  position: relative;
+}
+
+.inputsContainer {
+  margin: auto;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input {
+  height: 25px;
+  margin: 5px 0 5px 0;
+}
+
+.btnCreateRoom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}

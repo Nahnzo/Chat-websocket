@@ -1,21 +1,4 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
   "users": [
     {
       "id": 1756221526506,
@@ -65,5 +48,6 @@
       "username": "Alexey22",
       "password": "12345"
     }
-  ]
+  ],
+  "rooms": []
 }

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useAppSelector } from 'shared/hooks/typedHooks'
-import WebSocketComponent from 'app/entities/WebSocket/Websocket'
+import { WebSocketComponent } from 'entities/index'
 import classes from './roomPage.module.css'
 
 const RoomPage = () => {

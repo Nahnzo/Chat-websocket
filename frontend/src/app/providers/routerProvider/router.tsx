@@ -1,9 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { AuthForm, RegisterForm } from 'components/Form'
 import { ROUTES } from 'shared/routes/routes'
-import { ProfilePage } from 'shared/Pages'
 import App from '../../App'
-import { RoomPage } from 'components/Room'
+import { ProfilePage, RoomPage } from 'pages/index'
 
 export const router = createBrowserRouter([
   {

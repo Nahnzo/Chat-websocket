@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import Room, { RoomProps } from '../Room/Room'
 import classes from './roomList.module.css'
 import { ROUTES } from 'shared/routes/routes'
+import Room, { RoomProps } from 'entities/Room/ui/Room'
 
 const rooms: RoomProps[] = [
   { title: 'room1', type: 'public', quantityUsers: 10, roomId: '1' },

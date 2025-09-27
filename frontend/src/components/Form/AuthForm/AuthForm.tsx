@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { onLogin } from '../../User/model/services'
+import { onLogin } from '../../../entities/User/model/services'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/typedHooks'
 import { ROUTES } from 'shared/routes/routes'
 import { useRedirectHook } from 'shared/hooks/useRedirectHook'

@@ -1,31 +1,12 @@
 import { useState, useEffect } from 'react'
-import classes from './webSocket.module.css'
 import { EventsChat } from 'components/EventsChat'
+import { MessageData } from '../model/types'
+import classes from './webSocket.module.css'
 
 interface WebSocketComponentProps {
   roomId: string
   userName: string
 }
-
-export type MessageData =
-  | {
-      type: 'userJoined'
-      user: string
-      userNameColor: string
-      quantityUsers: number
-    }
-  | {
-      type: 'userLeft'
-      user: string
-      quantityUsers: number
-    }
-  | {
-      type: 'newMessage'
-      user: string
-      message: string
-      userNameColor: string
-      quantityUsers: number
-    }
 
 const WebSocketComponent = ({ roomId, userName }: WebSocketComponentProps) => {
   const [messages, setMessages] = useState<MessageData[]>([])

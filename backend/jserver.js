@@ -46,6 +46,20 @@ server.post('/login', (req, res) => {
   res.status(201).json({ message: 'Succeeded!' })
 })
 
+server.post('/createRoom', (req, res) => {
+  const { username, typeRoom, roomName } = req.body
+
+  const rooms = router.db.get('rooms').value()
+  const isValidRoomName = rooms.find((u) => u.roomName === roomName)
+
+  if (isValidRoomName) {
+    return res.status(400).json({ error: 'Комната с таким именем уже существует' })
+  }
+  const newRoom = { id: Date.now(), createdBy: username, typeRoom, roomName }
+  router.db.get('rooms').push(newRoom).write()
+  res.status(201).json(newRoom)
+})
+
 server.use(middlewares)
 server.use(router)
 
