@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { onLogin } from '../../../entities/User/model/services'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/typedHooks'
 import { ROUTES } from 'shared/routes/routes'
 import { useRedirectHook } from 'shared/hooks/useRedirectHook'
-import classes from './authForm.module.css'
 import { getIsAuthUser } from '../model/selectors'
+import { onLogin } from 'features/User/api/services'
+import classes from './authForm.module.css'
 
 const AuthForm = () => {
   const [username, setUsername] = useState<string>('')

@@ -35,6 +35,7 @@ server.post('/login', (req, res) => {
   const { username, password } = req.body
 
   const users = router.db.get('users').value()
+  const userId = users.filter((user) => user.username === username)
 
   const isValidPassword = users.find((u) => u.password === password)
   const isValidLogin = users.find((u) => u.username === username)
@@ -43,7 +44,7 @@ server.post('/login', (req, res) => {
     return res.status(400).json({ error: 'Wrong password or login' })
   }
 
-  res.status(201).json({ message: 'Succeeded!' })
+  res.status(201).json({ message: 'Succeeded!', userId: userId[0].id })
 })
 
 server.post('/createRoom', (req, res) => {
@@ -58,6 +59,11 @@ server.post('/createRoom', (req, res) => {
   const newRoom = { id: Date.now(), createdBy: username, typeRoom, roomName }
   router.db.get('rooms').push(newRoom).write()
   res.status(201).json(newRoom)
+})
+
+server.get('/getAllRooms', (req, res) => {
+  const rooms = router.db.get('rooms').value()
+  res.status(201).json(rooms)
 })
 
 server.use(middlewares)

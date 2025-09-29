@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { onLogin, onRegister } from './services'
+import { onLogin, onRegister } from 'features/User/api/services'
 
 interface User {
   username: string

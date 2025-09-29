@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ROUTES } from 'shared/routes/routes'
-import { onRegister } from '../../../entities/User/model/services'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/typedHooks'
 import { useRedirectHook } from 'shared/hooks/useRedirectHook'
 import { getIsAuthUser } from '../model/selectors'
 import classes from './registerForm.module.css'
+import { onRegister } from 'features/User/api/services'
 
 const RegisterForm = () => {
   const [username, setUsername] = useState<string>('')

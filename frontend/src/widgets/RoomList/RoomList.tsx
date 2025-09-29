@@ -1,27 +1,35 @@
 import { useNavigate } from 'react-router-dom'
-import classes from './roomList.module.css'
 import { ROUTES } from 'shared/routes/routes'
+import { getAllRooms } from 'features/Room/api/services'
+import classes from './roomList.module.css'
 import Room, { RoomProps } from 'entities/Room/ui/Room'
-
-const rooms: RoomProps[] = [
-  { title: 'room1', type: 'public', quantityUsers: 10, roomId: '1' },
-  { title: 'room2', type: 'closed', quantityUsers: 7, roomId: '2' },
-  { title: 'room3', type: 'by-password', quantityUsers: 0, roomId: '3' },
-  { title: 'room4', type: 'by-invite', quantityUsers: 2, roomId: '4' },
-]
+import { useEffect, useState } from 'react'
 
 const RoomsList = () => {
   const navigate = useNavigate()
+  const [rooms, setRooms] = useState<RoomProps[]>([])
 
   const navigateToRoom = (roomId: string) => {
     navigate(`${ROUTES.room}${roomId}`)
   }
 
+  useEffect(() => {
+    try {
+      const getRooms = async () => {
+        const rooms = await getAllRooms()
+        setRooms(rooms)
+      }
+      getRooms()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [rooms])
+
   return (
     <div className={classes.roomsContainer}>
       {rooms.map((room) => (
-        <div onClick={() => navigateToRoom(room.roomId)}>
-          <Room {...room} key={room.roomId} />
+        <div onClick={() => navigateToRoom(room.id)}>
+          <Room {...room} key={room.id} />
         </div>
       ))}
     </div>
