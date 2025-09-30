@@ -6,6 +6,7 @@ import classes from './roomForm.module.css'
 
 const RoomForm = () => {
   const [closedTypeRoomSelected, setClosedTypeRoomSelected] = useState(false)
+  const [passwordRoom, setPasswordRoom] = useState('')
   const [roomName, setRoomName] = useState('')
   const username = useAppSelector(getUserName)
 
@@ -27,7 +28,11 @@ const RoomForm = () => {
           <option>Закрытая</option>
         </select>
         {closedTypeRoomSelected && (
-          <input placeholder="Придумайте пароль" className={classes.input} />
+          <input
+            placeholder="Придумайте пароль"
+            className={classes.input}
+            onChange={(e) => setPasswordRoom(e.target.value)}
+          />
         )}
       </div>
       <button
@@ -35,8 +40,9 @@ const RoomForm = () => {
         onClick={() =>
           createRoom({
             username,
-            typeRoom: closedTypeRoomSelected ? 'closed' : 'public',
-            roomName,
+            type: closedTypeRoomSelected ? 'closed' : 'public',
+            name: roomName,
+            password: closedTypeRoomSelected ? passwordRoom : '',
           })
         }
       >

@@ -2,17 +2,18 @@ import { TypeRoom } from '../model/types'
 import classes from './room.module.css'
 
 export interface RoomProps {
-  typeRoom: TypeRoom
+  type: TypeRoom
   id: string
-  roomName: string
+  name: string
   createdBy: string
+  password?: string
 }
 
-const Room = ({ typeRoom, roomName, createdBy, id }: RoomProps) => {
+const Room = ({ type, name, createdBy, id }: RoomProps) => {
   return (
     <div className={classes.room}>
-      <div>{roomName}</div>
-      <div>{typeRoom}</div>
+      <div>{name}</div>
+      <div>{type}</div>
       <div>{createdBy}</div>
       <div>{id}</div>
     </div>

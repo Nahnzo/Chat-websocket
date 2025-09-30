@@ -10,7 +10,6 @@ interface ModalWindowProps {
 const ModalWindow = ({ isOpen, onClose, children }: ModalWindowProps) => {
   const container = document.getElementById('root')
   if (!container || !isOpen) return null
-  console.log(isOpen)
 
   return createPortal(
     <div className={classes.overlay} onClick={onClose}>
@@ -21,4 +20,3 @@ const ModalWindow = ({ isOpen, onClose, children }: ModalWindowProps) => {
 }
 
 export default ModalWindow
-//  onClick={(e) => e.stopPropagation()}

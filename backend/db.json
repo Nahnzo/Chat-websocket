@@ -51,46 +51,22 @@
   ],
   "rooms": [
     {
-      "id": 1759147660928,
-      "createdBy": "nahnzo1",
-      "typeRoom": "public",
-      "roomName": "dasdds"
+      "id": 1759250551369,
+      "createdBy": ""
     },
     {
-      "id": 1759148403695,
-      "createdBy": "nahnzo1",
-      "typeRoom": "closed",
-      "roomName": "комната"
+      "id": 1759250645718,
+      "createdBy": "",
+      "type": "public",
+      "name": "123123",
+      "password": ""
     },
     {
-      "id": 1759148421615,
-      "createdBy": "nahnzo1",
-      "typeRoom": "public",
-      "roomName": "выфв"
-    },
-    {
-      "id": 1759148459496,
-      "createdBy": "nahnzo1",
-      "typeRoom": "public",
-      "roomName": "2323"
-    },
-    {
-      "id": 1759148904891,
-      "createdBy": "nahnzo1",
-      "typeRoom": "public",
-      "roomName": "ddsa11111"
-    },
-    {
-      "id": 1759149220125,
-      "createdBy": "nahnzo1",
-      "typeRoom": "public",
-      "roomName": "d"
-    },
-    {
-      "id": 1759149374383,
-      "createdBy": "Alexey",
-      "typeRoom": "public",
-      "roomName": "1111111"
+      "id": 1759250658974,
+      "createdBy": "",
+      "type": "closed",
+      "name": "1221",
+      "password": "122112"
     }
   ]
 }

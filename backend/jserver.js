@@ -48,15 +48,15 @@ server.post('/login', (req, res) => {
 })
 
 server.post('/createRoom', (req, res) => {
-  const { username, typeRoom, roomName } = req.body
+  const { username, type, name, password } = req.body
 
   const rooms = router.db.get('rooms').value()
-  const isValidRoomName = rooms.find((u) => u.roomName === roomName)
+  const isValidRoomName = rooms.find((u) => u.name === name)
 
   if (isValidRoomName) {
     return res.status(400).json({ error: 'Комната с таким именем уже существует' })
   }
-  const newRoom = { id: Date.now(), createdBy: username, typeRoom, roomName }
+  const newRoom = { id: Date.now(), createdBy: username, type, name, password }
   router.db.get('rooms').push(newRoom).write()
   res.status(201).json(newRoom)
 })

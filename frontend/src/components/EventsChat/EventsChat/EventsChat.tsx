@@ -1,5 +1,5 @@
 import { Message } from 'shared/ui'
-import { MessageData } from 'app/entities/WebSocket/Websocket'
+import { MessageData } from 'entities/WebSocket/model/types'
 import classes from './eventChat.module.css'
 
 interface EventsChatProps {
